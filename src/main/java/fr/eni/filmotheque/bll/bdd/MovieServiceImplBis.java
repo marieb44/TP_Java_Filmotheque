@@ -18,22 +18,18 @@ import java.util.Optional;
 
 @Service
 @Profile("dev")
-public class MovieServiceImpl implements MovieService {
+public class MovieServiceImplBis implements MovieService {
 
+    @Autowired
     private PersonDao personDao;
+    @Autowired
     private MovieDao movieDao;
+    @Autowired
     private GenreDao genreDao;
+    @Autowired
     private MovieServiceCheck movieServiceCheck;
 
-    @Autowired //optionnel sur constructeur
-    public MovieServiceImpl(PersonDao personDao,
-                            MovieDao movieDao,
-                            GenreDao genreDao,
-                            MovieServiceCheck movieServiceCheck) {
-        this.personDao = personDao;
-        this.movieDao = movieDao;
-        this.genreDao = genreDao;
-        this.movieServiceCheck = movieServiceCheck;
+    public MovieServiceImplBis() {
     }
 
     @Override
@@ -84,7 +80,6 @@ public class MovieServiceImpl implements MovieService {
 
         //Contrôles selon règles métiers
         FilmException fe = new FilmException();
-
         //Passage sur validation détaillée pour appel de méthode de test unitaire
 //       movieServiceCheck.validateMovie(movie, fe);
 
