@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Films</title>
+    <div th:replace="/fragments/head"></div>
+</head>
+<body>
+
+<header th:insert="/fragments/header"></header>
+
+<main>
+    <h1 class="ml-10">Les films de l'ENI - <span th:text="${#temporals.format(date, 'dd/MM/yyyy HH:mm')}"></span></h1>
+
+    <table th:if="${films.size() > 0}" class="ml-10">
+        <thead>
+            <tr>
+                <th>Genre</th>
+                <th>Année</th>
+                <th>Titre</th>
+                <th>Réalisateur</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="film : ${films}">
+                <td th:text="${film.genre.label}"></td>
+                <td th:text="${film.year}"></td>
+                <td th:text="${film.title}"></td>
+                <td th:text="${film.director.firstName + ' ' + film.director.lastName}"></td>
+                <td><a th:href="@{/films/__${film.id}__}">Détail</a></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div th:if="${films.size() <= 0}">
+        Aucun film référencé.
+    </div>
+</main>
+
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Nouveau film</title>
+    <div th:replace="/fragments/head"></div>
+</head>
+<body>
+
+<header th:insert="/fragments/header"></header>
+
+<main>
+    <div class="form ml-2">
+        <h1>Ajout d'un film</h1>
+        <div th:if="${errors != null}">
+            <div class="error" th:each="err : ${errors}" th:text="${err}"></div>
+        </div>
+        <form action="/films/ajout" method="post" th:object="${film}">
+            <div class="champ">
+                <label th:for="genre">Genre : </label>
+                <select th:if="${listeGenres != null}" th:field="*{genre}" required>
+                    <option th:each="genre : ${listeGenres}" th:value="${genre.id}" th:text="${genre.label}"></option>
+                </select>
+            </div>
+            <div class="champ">
+                <label th:for="year">Année : </label>
+                <input type="number" min="1900" th:max="${annee}" th:field="*{year}" required>
+            </div>
+            <div class="champ">
+                <label th:for="title">Titre : </label>
+                <input type="text" th:field="*{title}" required>
+            </div>
+            <div class="champ">
+                <label th:for="director">Réalisateur : </label>
+                <select th:if="${listePeople != null}" th:field="*{director}" required>
+                    <option th:each="person : ${listePeople}" th:value="${person.id}" th:text="${person.firstName + ' ' + person.lastName}"></option>
+                </select>
+            </div>
+            <div class="champ">
+                <label th:for="duration">Durée (min) : </label>
+                <input type="number" min="1" th:field="*{duration}" required>
+            </div>
+            <div class="champ">
+                <label th:for="actors">Acteurs : </label>
+                <select th:if="${listePeople != null}" th:field="*{actors}" multiple>
+                    <option selected th:each="actor : ${listePeople}" th:value="${actor.id}" th:text="${actor.firstName + ' ' + actor.lastName}"></option>
+                </select>
+            </div>
+            <div class="champ">
+                <label th:for="synopsis">Synopsis : </label>
+                <textarea cols="30" rows="5" th:field="*{synopsis}" minlength="20" maxlength="250" required></textarea>
+            </div>
+            <div><button>Enregistrer</button></div>
+        </form>
+    </div>
+</main>
+
+</body>
+</html>

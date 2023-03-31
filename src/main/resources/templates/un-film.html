@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Film</title>
+    <div th:replace="/fragments/head"></div>
+</head>
+<body>
+
+<header th:insert="/fragments/header"></header>
+
+<main>
+    <div class="form ml-2">
+        <h1>Détail du film</h1>
+        <form action="" th:object="${film}">
+            <div class="champ">
+                <label for="genre">Genre : </label>
+                <input id="genre" name="genre" type="text" th:value="*{genre.label}" disabled>
+<!--            <input id="genre" name="genre" type="text" th:value="${film.genre.label}" disabled>-->
+
+            </div>
+            <div class="champ">
+                <label th:for="year">Année : </label>
+                <input type="text" th:field="${film.year}" disabled>
+<!--            <label for="year">Année : </label>-->
+<!--            <input type="text" id="year" name="year" th:value="${film.year}" disabled>-->
+            </div>
+            <div class="champ">
+                <label for="title">Titre : </label>
+                <input id="title" name="title" type="text" th:value="${film.title}" disabled>
+            </div>
+            <div class="champ">
+                <label for="director">Réalisateur : </label>
+                <input id="director" type="text" th:value="${film.director.firstName + ' ' + film.director.lastName}" disabled>
+            </div>
+            <div class="champ">
+                <label for="duration">Durée : </label>
+                <input id="duration" type="text" th:value="${film.duration + ' min'}" disabled>
+            </div>
+            <div class="champ">
+                <label for="actors">Acteurs : </label>
+<!--            <select id="actors" name="actors" th:if="${not #lists.isEmpty(film.actors)}" multiple>-->
+                <select id="actors" name="actors" th:if="${film.actors != null}" multiple>
+                    <option selected th:each="actor : ${film.actors}" th:value="${actor.id}" th:text="${actor.firstName + ' ' + actor.lastName}"></option>
+                </select>
+            </div>
+            <div class="champ">
+                <label for="synopsis">Synopsis : </label>
+                <textarea name="synopsis" id="synopsis" cols="30" rows="5" th:text="${film.synopsis}"></textarea>
+            </div>
+        </form>
+    </div>
+</main>
+
+</body>
+</html>

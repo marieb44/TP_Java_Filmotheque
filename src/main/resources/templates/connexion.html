@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Title</title>
+    <div th:replace="/fragments/head"></div>
+</head>
+<body>
+<header th:insert="/fragments/header"></header>
+
+<main>
+    <div class="form ml-2">
+        <div class="error" th:if="${error != null}" th:text="${error}"></div>
+<!--        <div th:if="${error != null}" th:class="${'error'}" th:text="${error}"></div>-->
+        <h1>Se connecter</h1>
+        <form action="/login" method="post">
+            <div class="champ">
+                <label for="login">Pseudo</label>
+                <input id="login" name="login" type="text" title="Saisissez votre pseudo">
+            </div>
+            <div class="champ">
+                <label for="password">Mot de passe : </label>
+                <input id="password" name="password" type="password" title="Saisissez votre mot de passe">
+            </div>
+            <button type="submit">Connexion</button>
+        </form>
+    </div>
+</main>
+</body>
+</html>

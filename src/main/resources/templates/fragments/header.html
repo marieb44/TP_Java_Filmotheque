@@ -1,0 +1,22 @@
+<div class="nav ml-10">
+    <div>
+        <h1>
+            <a href="/"><span th:text="#{filmothequeh1}"></span>
+                <span th:if="${session.member != null}" th:text="${'[' + session.member.firstName + ']'}"></span>
+            </a>
+        </h1>
+    </div>
+    <div>
+        <h3><a href="/films">Films</a></h3>
+
+        <h3 th:if="${session.member == null}"><a href="/login">Connexion</a></h3>
+
+        <h3 th:if="${session.member != null}"><a href="/films/ajout">Ajout</a></h3>
+        <h3 th:if="${session.member != null}"><a href="/logout">Déconnexion</a></h3>
+        <!--  <h3 th:unless="${session.member == null}"><a href="/logout">Déconnexion</a></h3>-->
+    </div>
+</div>
+<div class="ml-10">
+    <a href="?language=fr">Français</a>
+    <a href="?language=en">Anglais</a>
+</div>
